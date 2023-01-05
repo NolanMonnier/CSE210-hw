@@ -66,7 +66,7 @@ class Program
 
         else
         {
-            Console.WriteLine("My dude! You suck... Try again next semester, and hopefuly it'll be better");
+            Console.WriteLine("My dude! I'm sorry, you didn't do good enough! Try again next semester, and hopefuly it'll be better");
         }
     }
 }
