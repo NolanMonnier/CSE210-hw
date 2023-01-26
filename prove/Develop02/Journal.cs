@@ -6,9 +6,6 @@ public class Journal
 {
     public string _entryResponse = "";
 
-    public string _journalOut = "";
-    public List<string> _journalList = new List<string>();
-
     public void StoreJournal()
     {
         Console.Write("Please enter the name of the file you would like to save your journal to: ");
