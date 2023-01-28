@@ -1,6 +1,9 @@
 using System;
 using System.IO;
 
+// ----- EXTRA WORK -----
+//For the extra work, I added a follow question after the user answers, by asking them "How did that make you feel?"
+
 class Program
 {
     static void Main(string[] args)
