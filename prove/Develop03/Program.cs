@@ -13,9 +13,27 @@ class Program
         };
         Scripture scripture = new Scripture(verses);
 
+        string _answer = "";
+        Console.WriteLine("Here is your scripture:");
+        bool _isAllHiden = scripture.IsAllHidden();
 
-        //scripture.Display();
-        scripture.RandomVerse(verses);
+        while (_answer != "Quit" && _isAllHiden != true)
+        {
+            scripture.Display();
+            Console.WriteLine(" ");
+            Console.Write("Please press Enter to hide words, or write Quit to quit");
+            scripture.HideWords(3);
+            _answer = Console.ReadLine();
+            Console.WriteLine(" ");
+            _isAllHiden = scripture.IsAllHidden();
+        }
+        scripture.Display();
+        Console.WriteLine(" ");
+        Console.Write("Please press enter to hide words, or write Quit to quit");
+        Console.ReadLine();
+
+
+        Console.WriteLine("Quitting...");
 
     }
 }

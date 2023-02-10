@@ -4,11 +4,13 @@ using System.Collections.Generic;
 public class Verse
 {
     private List<Word> _text = new List<Word>();
+    //private bool _isAllHiden = false;
 
     public Verse()
     {
 
     }
+
     public Verse(string verse)
     {
         string[] words = verse.Split(" ");
@@ -19,11 +21,33 @@ public class Verse
         }
     }
 
-    public void RandomWord(List<Verse> verses)
+    public bool IsAllHidden()
     {
-        var random = new Random();
-        int index = random.Next(verses.Count);
-        Console.WriteLine(verses[index]);
+        foreach (Word word in _text)
+        {
+            if (!word._hidden)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public void HideWords()
+    {
+        if (!IsAllHidden())
+        {
+            var random = new Random();
+            int index = random.Next(_text.Count);
+            Word _wordToHide = _text[index];
+            while (_wordToHide._hidden)
+            {
+                index = random.Next(_text.Count);
+                _wordToHide = _text[index];
+            }
+            _text[index].HideWord(_wordToHide);
+        }
+
     }
 
     public void Display()

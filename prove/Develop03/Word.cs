@@ -4,6 +4,7 @@ using System.Collections.Generic;
 public class Word
 {
     private string _text = "";
+    public bool _hidden = false;
 
     public Word(string word)
     {
@@ -12,7 +13,22 @@ public class Word
 
     public void Display()
     {
-        Console.Write(_text);
+        if (!_hidden)
+        {
+            Console.Write(_text);
+        }
+        else
+        {
+            foreach (char letter in _text)
+            {
+                Console.Write("_");
+            }
+        }
+    }
+
+    public void HideWord(Word word)
+    {
+        _hidden = true;
     }
 
 }
