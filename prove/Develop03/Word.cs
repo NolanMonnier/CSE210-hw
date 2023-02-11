@@ -30,10 +30,8 @@ public class Word
     {
         _hidden = true;
     }
-
     public bool IsHidden()
     {
         return _hidden;
     }
-
 }

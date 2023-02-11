@@ -16,8 +16,8 @@ class Program
             "Trust in the Lord with all thine heart and lean not unto thine own understanding",
             "In all thy ways acknowledge him and he shall direct thy paths"
         };
-        Scripture scripture = new Scripture(verses);
 
+        Scripture scripture = new Scripture(verses);
         string _answer = "";
         Console.WriteLine("Here is your scripture:");
         bool _isAllHiden = scripture.IsAllHidden();
@@ -45,8 +45,6 @@ class Program
             Console.ReadLine();
         }
 
-
         Console.WriteLine("Quitting...");
-
     }
 }

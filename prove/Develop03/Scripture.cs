@@ -3,7 +3,6 @@ using System.Collections.Generic;
 
 public class Scripture
 {
-
     private List<Verse> _verses = new List<Verse>();
     public Scripture(List<string> verses)
     {
