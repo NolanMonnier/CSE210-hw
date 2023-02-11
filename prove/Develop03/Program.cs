@@ -10,6 +10,7 @@ class Program
         Console.Write("Please enter the largest amount of words you would like to hide: ");
         string _countStr = Console.ReadLine();
         int _count = int.Parse(_countStr);
+        Console.WriteLine();
         List<string> verses = new List<string>
         {
             "Trust in the Lord with all thine heart and lean not unto thine own understanding",
@@ -29,7 +30,7 @@ class Program
             scripture.HideWords(_count);
             _answer = Console.ReadLine();
             Console.WriteLine(" ");
-            if (_answer == "Quit")
+            if (_answer == "Quit" || _answer == "quit")
             {
                 break;
             }

@@ -4,7 +4,6 @@ using System.Collections.Generic;
 public class Verse
 {
     private List<Word> _text = new List<Word>();
-    //private bool _isAllHiden = false;
 
     public Verse()
     {
@@ -25,7 +24,7 @@ public class Verse
     {
         foreach (Word word in _text)
         {
-            if (!word._hidden)
+            if (!word.IsHidden())
             {
                 return false;
             }
@@ -40,7 +39,7 @@ public class Verse
             var random = new Random();
             int index = random.Next(_text.Count);
             Word _wordToHide = _text[index];
-            while (_wordToHide._hidden)
+            while (_wordToHide.IsHidden())
             {
                 index = random.Next(_text.Count);
                 _wordToHide = _text[index];
