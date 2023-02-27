@@ -4,6 +4,7 @@ class Program
 {
     static void Main(string[] args)
     {
+        // For the extra work, I decided to add the amount of activities that the user did, as well as the amount of seconds they used. 
         int answer = 0;
         int count = 0;
         int totalTime = 0;
