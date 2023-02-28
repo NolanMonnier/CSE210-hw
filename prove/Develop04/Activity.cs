@@ -8,8 +8,6 @@ public class Activity
     private int _activityLength = 0;
     private string _endingMessage = "Well Done!";
 
-    //private string _spinner = "";
-
     public Activity()
     {
 

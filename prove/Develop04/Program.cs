@@ -16,7 +16,6 @@ class Program
             {
                 Console.WriteLine("Welcome to the mindfulness activity");
             }
-
             if (count == 1)
             {
                 System.Console.WriteLine($"You have completed {count} activity.");
@@ -27,6 +26,7 @@ class Program
                 System.Console.WriteLine($"You have completed {count} activities.");
                 System.Console.WriteLine($"You have done activities for {totalTime} seconds.");
             }
+
             System.Console.WriteLine("");
             Console.WriteLine("Menu Options:");
             Console.WriteLine("1. Start breathing activity");
@@ -46,7 +46,6 @@ class Program
                 totalTime += seconds;
                 count++;
             }
-
             if (answer == 2)
             {
                 Reflecting reflectingBasic = new Reflecting();

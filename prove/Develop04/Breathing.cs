@@ -23,10 +23,8 @@ public class Breathing : Activity
 
     public void DisplayBreathingExo()
     {
-
         while (_duration > 0)
         {
-
             System.Console.Write("Breath in... ");
             DisplayTimer(5);
             System.Console.WriteLine();
