@@ -52,13 +52,13 @@ public class GoalEternal : Goal
 
         return lineDisplay;
     }
-    public override int RecordEvent(string[] seperated)
+    public override int RecordEvent(string[] seperated, int totalPoints)
     {
         _name = seperated[1];
         _description = seperated[2];
         _points = int.Parse(seperated[3]);
         _goalCount = int.Parse(seperated[4]);
-        _totalPoints = _points + _totalPoints;
+        _totalPoints = _points + totalPoints;
         System.Console.WriteLine($"Congratulations!! You have earned {_points} points!");
         System.Console.WriteLine($"You now have {_totalPoints} point.");
         return _totalPoints;

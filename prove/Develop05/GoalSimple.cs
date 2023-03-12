@@ -52,12 +52,28 @@ public class GoalSimple : Goal
         _isCompleted = bool.Parse(seperated[4]);
 
         string lineDisplay = _goalCount.ToString() + ". [ ] " + _name + " (" + _description + ")";
-
         return lineDisplay;
     }
 
-    public override int RecordEvent(string[] seperated)
+    public override int RecordEvent(string[] seperated, int totalPoints)
     {
-        throw new NotImplementedException();
+        _name = seperated[1];
+        _description = seperated[2];
+        _points = int.Parse(seperated[3]);
+        _isCompleted = bool.Parse(seperated[4]);
+        _goalCount = int.Parse(seperated[5]);
+        _totalPoints = _points + totalPoints;
+        System.Console.WriteLine($"Congratulations!! You have earned {_points} points!");
+        System.Console.WriteLine($"You now have {_totalPoints} point.");
+        return _totalPoints;
+    }
+
+    public string CheckDisplay(string[] seperated)
+    {
+        _name = seperated[1];
+        _description = seperated[2];
+        _goalCount = int.Parse(seperated[5]);
+        string lineDisplay = _goalCount.ToString() + ". [X] " + _name + " (" + _description + ")";
+        return lineDisplay;
     }
 }

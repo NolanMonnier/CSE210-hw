@@ -1,4 +1,4 @@
-50
+100
 SimpleGoal | Simple | Test | 100 | False | 1
 EternalGoal | Eternal | Test | 50 | 2
 ChecklistGoal | Checklist | Test | 50 | 1000 | 3 | 0 | 3

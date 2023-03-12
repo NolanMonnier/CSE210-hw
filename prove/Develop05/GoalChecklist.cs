@@ -76,7 +76,7 @@ public class GoalChecklist : Goal
         string lineDisplay = _goalCount.ToString() + ". [ ] " + _name + " (" + _description + ") -- Currently completed: " + _checklistCount + "/" + _goalNeeded;
         return lineDisplay;
     }
-    public override int RecordEvent(string[] seperated)
+    public override int RecordEvent(string[] seperated, int totalPoints)
     {
         throw new NotImplementedException();
     }

@@ -9,6 +9,7 @@ public abstract class Goal
     List<string> _goalsDisplay = new List<string>();
     private int goalCount = 1;
     private int _totalPoints;
+    private string _loadFileName;
 
     public Goal()
     {
@@ -65,8 +66,8 @@ public abstract class Goal
     public List<string> LoadGoals()
     {
         Console.Write("What is the filename for the goal file? ");
-        string fileName = Console.ReadLine();
-        string[] lines = System.IO.File.ReadAllLines(fileName);
+        _loadFileName = Console.ReadLine();
+        string[] lines = System.IO.File.ReadAllLines(_loadFileName);
         foreach (string line in lines)
         {
             if (line.Contains("SimpleGoal"))
@@ -94,20 +95,19 @@ public abstract class Goal
                 goalCount++;
             }
         }
-
         return _goalsDisplay;
     }
 
-    public int RecordEvent()
+    public int SetTotal()
     {
-        System.Console.WriteLine("The goals are:");
+        string[] lines = System.IO.File.ReadAllLines(_loadFileName);
 
-        foreach (string goal in _goalsDisplay)
-        {
-            System.Console.WriteLine(goal);
-        }
-        System.Console.Write("Which goal did you accomplish? ");
-        int recordAnswer = int.Parse(Console.ReadLine());
+        _totalPoints = int.Parse(lines[0]);
+        return _totalPoints;
+    }
+
+    public int RecordEvent(int totalPoints, int recordAnswer)
+    {
         foreach (string goal in _goalsText)
         {
             string[] seperated = goal.Split("|");
@@ -117,12 +117,12 @@ public abstract class Goal
                 if (goal.Contains("SimpleGoal"))
                 {
                     GoalSimple simple = new GoalSimple();
-                    _totalPoints = simple.RecordEvent();
+                    _totalPoints = simple.RecordEvent(seperated, totalPoints);
                 }
                 if (goal.Contains("EternalGoal"))
                 {
                     GoalEternal eternal = new GoalEternal();
-                    _totalPoints = eternal.RecordEvent(seperated);
+                    _totalPoints = eternal.RecordEvent(seperated, totalPoints);
                 }
             }
         }
@@ -136,5 +136,5 @@ public abstract class Goal
 
     public abstract void AddGoal();
     public abstract string AddDisplayList(string line, int goalCount);
-    public abstract int RecordEvent(string[] line);
+    public abstract int RecordEvent(string[] line, int totalPoints);
 }

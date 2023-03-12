@@ -104,12 +104,33 @@ class Program
             {
                 goalsDisplay = simple.LoadGoals();
                 goalCount = simple.SetCount();
+                totalPoints = simple.SetTotal();
             }
 
             if (answer == 5)
             {
-                totalPoints = simple.RecordEvent();
+                System.Console.WriteLine("The goals are:");
+
+                foreach (string goal in goalsDisplay)
+                {
+                    System.Console.WriteLine(goal);
+                }
+                System.Console.Write("Which goal did you accomplish? ");
+                int recordAnswer = int.Parse(Console.ReadLine());
+                totalPoints = simple.RecordEvent(totalPoints, recordAnswer);
                 goalsText[0] = totalPoints.ToString();
+                foreach (string goal in goalsText)
+                {
+                    string[] seperated = goal.Split("|");
+                    int itemCount = seperated.Length;
+                    if (recordAnswer == int.Parse(seperated[itemCount - 1]))
+                    {
+                        if (goal.Contains("SimpleGoal"))
+                        {
+                            goalsDisplay[recordAnswer - 1] = simple.CheckDisplay(seperated);
+                        }
+                    }
+                }
             }
 
             if (answer >= 6)
