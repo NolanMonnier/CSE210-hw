@@ -11,9 +11,11 @@ public class GoalChecklist : Goal
     private int _bonusPoints;
     private int _checklistCount;
     private string _sep = " | ";
-    List<string> _goals = new List<string>();
+    List<string> _goalsDisplay = new List<string>();
+    List<string> _goalsText = new List<string>();
+    private int _totalPoints;
 
-    public GoalChecklist() : base("", "", 0)
+    public GoalChecklist() : base()
     {
 
     }
@@ -23,15 +25,19 @@ public class GoalChecklist : Goal
                       int goalNeeded,
                       int bonusPoints,
                       int goalCount,
-                      List<string> goals) : base(name, description, points)
+                      List<string> goalsDisplay,
+                      List<string> goalsText,
+                      int totalPoints) : base(name, description, points, goalsDisplay, goalsText, totalPoints)
     {
         _name = name;
         _description = description;
         _points = points;
         _goalCount = goalCount;
         _goalNeeded = goalNeeded;
-        _goals = goals;
+        _goalsDisplay = goalsDisplay;
+        _goalsText = goalsText;
         _bonusPoints = bonusPoints;
+        _totalPoints = totalPoints;
     }
 
     public int DisplayGoalNeeded()
@@ -50,7 +56,28 @@ public class GoalChecklist : Goal
 
     public override void AddGoal()
     {
-        string line = _goalCount.ToString() + ". [ ] " + _name + " (" + _description + ") -- Currently completed: " + _checklistCount + "/" + _goalNeeded;
-        _goals.Add(line);
+        string lineDisplay = _goalCount.ToString() + ". [ ] " + _name + " (" + _description + ") -- Currently completed: " + _checklistCount + "/" + _goalNeeded;
+        _goalsDisplay.Add(lineDisplay);
+        string lineText = "ChecklistGoal" + _sep + _name + _sep + _description + _sep + _points + _sep + _bonusPoints + _sep + _goalNeeded + _sep + _checklistCount + _sep + _goalCount;
+        _goalsText.Add(lineText);
+    }
+
+    public override string AddDisplayList(string line, int goalCount)
+    {
+        string[] seperated = line.Split(_sep);
+        _goalCount = goalCount;
+        _name = seperated[1];
+        _description = seperated[2];
+        _points = int.Parse(seperated[3]);
+        _bonusPoints = int.Parse(seperated[4]);
+        _goalNeeded = int.Parse(seperated[5]);
+        _checklistCount = int.Parse(seperated[6]);
+
+        string lineDisplay = _goalCount.ToString() + ". [ ] " + _name + " (" + _description + ") -- Currently completed: " + _checklistCount + "/" + _goalNeeded;
+        return lineDisplay;
+    }
+    public override int RecordEvent(string[] seperated)
+    {
+        throw new NotImplementedException();
     }
 }

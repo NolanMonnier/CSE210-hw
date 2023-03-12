@@ -15,7 +15,10 @@ class Program
         int goalNeeded = 0;
         int bonusPoints = 0;
         int checklistCount = 0;
-        List<string> goals = new List<string>();
+        List<string> goalsDisplay = new List<string>();
+        List<string> goalsText = new List<string>();
+        goalsText.Add(totalPoints.ToString());
+        GoalSimple simple = new GoalSimple(name, description, points, goalCount, goalsDisplay, goalsText, completed, totalPoints);
 
         Console.Clear();
 
@@ -52,7 +55,7 @@ class Program
                     description = simpleIntro.DisplayDescIntro();
                     points = simpleIntro.DisplayPointsIntro();
 
-                    GoalSimple simpleGoal = new GoalSimple(name, description, points, goalCount, goals, completed);
+                    GoalSimple simpleGoal = new GoalSimple(name, description, points, goalCount, goalsDisplay, goalsText, completed, totalPoints);
                     simpleGoal.AddGoal();
                     goalCount++;
                 }
@@ -63,7 +66,7 @@ class Program
                     description = eternalIntro.DisplayDescIntro();
                     points = eternalIntro.DisplayPointsIntro();
 
-                    GoalEternal eternalGoal = new GoalEternal(name, description, points, goalCount, goals);
+                    GoalEternal eternalGoal = new GoalEternal(name, description, points, goalCount, goalsDisplay, goalsText, totalPoints);
                     eternalGoal.AddGoal();
                     goalCount++;
                 }
@@ -76,7 +79,7 @@ class Program
                     goalNeeded = checklistIntro.DisplayGoalNeeded();
                     bonusPoints = checklistIntro.DisplayBonusPoints();
 
-                    GoalChecklist checklistGoal = new GoalChecklist(name, description, points, goalNeeded, bonusPoints, goalCount, goals);
+                    GoalChecklist checklistGoal = new GoalChecklist(name, description, points, goalNeeded, bonusPoints, goalCount, goalsDisplay, goalsText, totalPoints);
                     checklistGoal.AddGoal();
                     goalCount++;
                 }
@@ -86,10 +89,32 @@ class Program
             {
                 System.Console.WriteLine("The goals are:");
 
-                foreach (string goal in goals)
+                foreach (string goal in goalsDisplay)
                 {
                     System.Console.WriteLine(goal);
                 }
+            }
+
+            if (answer == 3)
+            {
+                simple.SaveGoals();
+            }
+
+            if (answer == 4)
+            {
+                goalsDisplay = simple.LoadGoals();
+                goalCount = simple.SetCount();
+            }
+
+            if (answer == 5)
+            {
+                totalPoints = simple.RecordEvent();
+                goalsText[0] = totalPoints.ToString();
+            }
+
+            if (answer >= 6)
+            {
+                System.Console.WriteLine("Quitting...");
             }
         }
 
