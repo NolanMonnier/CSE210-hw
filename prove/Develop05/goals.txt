@@ -1,4 +1,4 @@
-100
-SimpleGoal | Simple | Test | 100 | False | 1
-EternalGoal | Eternal | Test | 200 | 2
-ChecklistGoal | Checklist | Test | 50 | 1000 | 3 | 0 | 3
+2500
+SimpleGoal | Finsih my Goals project | Finish my Goals project Finish the project that I have to for CSE 210 | 1000 | True | 1
+EternalGoal | Eat a balanced meal | Eat a meal that is well balanced and healthy | 50 | 2
+ChecklistGoal | Go to the temple | Go and do an endowment session | 100 | 1000 | 3 | 3 | 3

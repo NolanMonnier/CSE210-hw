@@ -68,7 +68,7 @@ public class GoalEternal : Goal
     {
         _name = seperated[1];
         _description = seperated[2];
-        _goalCount = int.Parse(seperated[5]);
+        _goalCount = int.Parse(seperated[4]);
         string lineDisplay = _goalCount.ToString() + ". [ ] " + _name + " (" + _description + ")";
         return lineDisplay;
     }

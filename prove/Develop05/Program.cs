@@ -14,7 +14,6 @@ class Program
         int goalCount = 1;
         int goalNeeded = 0;
         int bonusPoints = 0;
-        int checklistCount = 0;
         List<string> goalsDisplay = new List<string>();
         List<string> goalsText = new List<string>();
         goalsText.Add(totalPoints.ToString());
