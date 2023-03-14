@@ -97,7 +97,7 @@ class Program
 
             if (answer == 3)
             {
-                simple.SaveGoals();
+                simple.SaveGoals(goalsText);
             }
 
             if (answer == 4)
@@ -117,8 +117,11 @@ class Program
                 }
                 System.Console.Write("Which goal did you accomplish? ");
                 int recordAnswer = int.Parse(Console.ReadLine());
-                totalPoints = simple.RecordEvent(totalPoints, recordAnswer);
+                totalPoints = simple.RecordEvent(totalPoints, recordAnswer, goalsText);
                 goalsText[0] = totalPoints.ToString();
+                List<string> newGoalsText = new List<string>();
+
+
                 foreach (string goal in goalsText)
                 {
                     string[] seperated = goal.Split("|");
@@ -127,10 +130,29 @@ class Program
                     {
                         if (goal.Contains("SimpleGoal"))
                         {
-                            goalsDisplay[recordAnswer - 1] = simple.CheckDisplay(seperated);
+                            goalsDisplay[recordAnswer - 1] = simple.ChangeDisplay(seperated);
+                            newGoalsText.Add(simple.ChangeText(goal, recordAnswer));
+                        }
+                        else if (goal.Contains("EternalGoal"))
+                        {
+                            GoalEternal eternal = new GoalEternal();
+                            goalsDisplay[recordAnswer - 1] = eternal.ChangeDisplay(seperated);
+                            newGoalsText.Add(eternal.ChangeText(goal, recordAnswer));
+                        }
+                        else if (goal.Contains("ChecklistGoal"))
+                        {
+                            GoalChecklist checklist = new GoalChecklist();
+                            goalsDisplay[recordAnswer - 1] = checklist.ChangeDisplay(seperated);
+                            newGoalsText.Add(checklist.ChangeText(goal, recordAnswer));
                         }
                     }
+                    else
+                    {
+                        newGoalsText.Add(goal);
+                    }
                 }
+                goalsText = newGoalsText;
+                recordAnswer = 0;
             }
 
             if (answer >= 6)
@@ -138,8 +160,5 @@ class Program
                 System.Console.WriteLine("Quitting...");
             }
         }
-
-
-
     }
 }

@@ -52,7 +52,7 @@ public class GoalEternal : Goal
 
         return lineDisplay;
     }
-    public override int RecordEvent(string[] seperated, int totalPoints)
+    public override int RecordEvent(string[] seperated, int totalPoints, List<string> goalsText)
     {
         _name = seperated[1];
         _description = seperated[2];
@@ -62,5 +62,25 @@ public class GoalEternal : Goal
         System.Console.WriteLine($"Congratulations!! You have earned {_points} points!");
         System.Console.WriteLine($"You now have {_totalPoints} point.");
         return _totalPoints;
+    }
+
+    public override string ChangeDisplay(string[] seperated)
+    {
+        _name = seperated[1];
+        _description = seperated[2];
+        _goalCount = int.Parse(seperated[5]);
+        string lineDisplay = _goalCount.ToString() + ". [ ] " + _name + " (" + _description + ")";
+        return lineDisplay;
+    }
+
+    public override string ChangeText(string line, int goalCount)
+    {
+        string[] seperated = line.Split(_sep);
+        _goalCount = goalCount;
+        _name = seperated[1];
+        _description = seperated[2];
+        _points = int.Parse(seperated[3]);
+        string textDisplay = "EternalGoal" + _sep + _name + _sep + _description + _sep + _points + _sep + _goalCount;
+        return textDisplay;
     }
 }

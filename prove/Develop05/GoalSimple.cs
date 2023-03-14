@@ -50,12 +50,19 @@ public class GoalSimple : Goal
         _description = seperated[2];
         _points = int.Parse(seperated[3]);
         _isCompleted = bool.Parse(seperated[4]);
-
-        string lineDisplay = _goalCount.ToString() + ". [ ] " + _name + " (" + _description + ")";
+        string lineDisplay = "";
+        if (_isCompleted == false)
+        {
+            lineDisplay = _goalCount.ToString() + ". [ ] " + _name + " (" + _description + ")";
+        }
+        if (_isCompleted == true)
+        {
+            lineDisplay = _goalCount.ToString() + ". [X] " + _name + " (" + _description + ")";
+        }
         return lineDisplay;
     }
 
-    public override int RecordEvent(string[] seperated, int totalPoints)
+    public override int RecordEvent(string[] seperated, int totalPoints, List<string> goalsText)
     {
         _name = seperated[1];
         _description = seperated[2];
@@ -68,12 +75,29 @@ public class GoalSimple : Goal
         return _totalPoints;
     }
 
-    public string CheckDisplay(string[] seperated)
+    public override string ChangeDisplay(string[] seperated)
     {
         _name = seperated[1];
         _description = seperated[2];
         _goalCount = int.Parse(seperated[5]);
         string lineDisplay = _goalCount.ToString() + ". [X] " + _name + " (" + _description + ")";
         return lineDisplay;
+    }
+
+    public bool ChangeBool(bool booleanSep)
+    {
+        booleanSep = true;
+        return booleanSep;
+    }
+    public override string ChangeText(string line, int goalCount)
+    {
+        string[] seperated = line.Split(_sep);
+        _goalCount = goalCount;
+        _name = seperated[1];
+        _description = seperated[2];
+        _points = int.Parse(seperated[3]);
+        _isCompleted = true;
+        string textDisplay = "SimpleGoal" + _sep + _name + _sep + _description + _sep + _points + _sep + _isCompleted + _sep + _goalCount; ;
+        return textDisplay;
     }
 }

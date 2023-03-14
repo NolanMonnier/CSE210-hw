@@ -76,8 +76,65 @@ public class GoalChecklist : Goal
         string lineDisplay = _goalCount.ToString() + ". [ ] " + _name + " (" + _description + ") -- Currently completed: " + _checklistCount + "/" + _goalNeeded;
         return lineDisplay;
     }
-    public override int RecordEvent(string[] seperated, int totalPoints)
+    public override int RecordEvent(string[] seperated, int totalPoints, List<string> goalsText)
     {
-        throw new NotImplementedException();
+        _name = seperated[1];
+        _description = seperated[2];
+        _points = int.Parse(seperated[3]);
+        _bonusPoints = int.Parse(seperated[4]);
+        _goalNeeded = int.Parse(seperated[5]);
+        _checklistCount = int.Parse(seperated[6]) + 1;
+        _goalCount = int.Parse(seperated[7]);
+
+        if (_checklistCount == _goalNeeded)
+        {
+            _totalPoints = totalPoints + _points + _bonusPoints;
+            System.Console.WriteLine($"Congratulations!! You have earned {_points + _bonusPoints} points!");
+            System.Console.WriteLine($"You now have {_totalPoints} point.");
+        }
+        if (_checklistCount < _goalNeeded)
+        {
+            _totalPoints = _points + totalPoints;
+            System.Console.WriteLine($"Congratulations!! You have earned {_points} points!");
+            System.Console.WriteLine($"You now have {_totalPoints} point.");
+        }
+
+        return _totalPoints;
+
+    }
+
+    public override string ChangeDisplay(string[] seperated)
+    {
+        string lineDisplay = "";
+        _name = seperated[1];
+        _description = seperated[2];
+        _points = int.Parse(seperated[3]);
+        _bonusPoints = int.Parse(seperated[4]);
+        _goalNeeded = int.Parse(seperated[5]);
+        _checklistCount = int.Parse(seperated[6]) + 1;
+        _goalCount = int.Parse(seperated[7]);
+        if (_checklistCount != _goalNeeded)
+        {
+            lineDisplay = _goalCount.ToString() + ". [ ] " + _name + " (" + _description + ") -- Currently completed: " + _checklistCount + "/" + _goalNeeded;
+        }
+        if (_checklistCount == _goalNeeded)
+        {
+            lineDisplay = _goalCount.ToString() + ". [X] " + _name + " (" + _description + ") -- Currently completed: " + _checklistCount + "/" + _goalNeeded;
+        }
+        return lineDisplay;
+    }
+
+    public override string ChangeText(string line, int goalCount)
+    {
+        string[] seperated = line.Split(_sep);
+        _goalCount = goalCount;
+        _name = seperated[1];
+        _description = seperated[2];
+        _points = int.Parse(seperated[3]);
+        _bonusPoints = int.Parse(seperated[4]);
+        _goalNeeded = int.Parse(seperated[5]);
+        _checklistCount = int.Parse(seperated[6]) + 1;
+        string textDisplay = "ChecklistGoal" + _sep + _name + _sep + _description + _sep + _points + _sep + _bonusPoints + _sep + _goalNeeded + _sep + _checklistCount + _sep + _goalCount;
+        return textDisplay;
     }
 }

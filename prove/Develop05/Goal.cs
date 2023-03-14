@@ -51,14 +51,14 @@ public abstract class Goal
         return _points;
     }
 
-    public void SaveGoals()
+    public void SaveGoals(List<string> goalsText)
     {
         Console.Write("What is the filename for the goal file? ");
         string fileName = Console.ReadLine();
 
         using (StreamWriter outputFile = new StreamWriter(fileName))
         {
-            outputFile.WriteLine(string.Join(Environment.NewLine, _goalsText));
+            outputFile.WriteLine(string.Join(Environment.NewLine, goalsText));
 
         }
     }
@@ -106,9 +106,9 @@ public abstract class Goal
         return _totalPoints;
     }
 
-    public int RecordEvent(int totalPoints, int recordAnswer)
+    public int RecordEvent(int totalPoints, int recordAnswer, List<string> goalsText)
     {
-        foreach (string goal in _goalsText)
+        foreach (string goal in goalsText)
         {
             string[] seperated = goal.Split("|");
             int itemCount = seperated.Length;
@@ -117,12 +117,18 @@ public abstract class Goal
                 if (goal.Contains("SimpleGoal"))
                 {
                     GoalSimple simple = new GoalSimple();
-                    _totalPoints = simple.RecordEvent(seperated, totalPoints);
+                    _totalPoints = simple.RecordEvent(seperated, totalPoints, goalsText);
                 }
                 if (goal.Contains("EternalGoal"))
                 {
                     GoalEternal eternal = new GoalEternal();
-                    _totalPoints = eternal.RecordEvent(seperated, totalPoints);
+                    _totalPoints = eternal.RecordEvent(seperated, totalPoints, goalsText);
+                }
+                if (goal.Contains("ChecklistGoal"))
+                {
+                    GoalChecklist checklist = new GoalChecklist();
+                    _totalPoints = checklist.RecordEvent(seperated, totalPoints, goalsText);
+
                 }
             }
         }
@@ -136,5 +142,7 @@ public abstract class Goal
 
     public abstract void AddGoal();
     public abstract string AddDisplayList(string line, int goalCount);
-    public abstract int RecordEvent(string[] line, int totalPoints);
+    public abstract int RecordEvent(string[] line, int totalPoints, List<string> goalsText);
+    public abstract string ChangeDisplay(string[] seperated);
+    public abstract string ChangeText(string line, int goalCount);
 }
