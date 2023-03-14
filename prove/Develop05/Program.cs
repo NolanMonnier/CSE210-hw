@@ -4,6 +4,10 @@ class Program
 {
     static void Main(string[] args)
     {
+        //To exceed the requirements, I added a "Negative Goal" that essentially 
+        //works as an eternal goal but will negatively impact the total points. 
+        //For example, if the user says that skipping class will cost them 50 
+        //points when they record it, the total points will be 50 points lower. 
         int answer = 0;
         bool completed = false;
         int totalPoints = 0;
@@ -43,6 +47,7 @@ class Program
                 System.Console.WriteLine(" 1. Simple Goal");
                 System.Console.WriteLine(" 2. Eternal Goal");
                 System.Console.WriteLine(" 3. Checklist Goal");
+                System.Console.WriteLine(" 4. Negative Goal");
                 System.Console.Write("Which type of goal would you like to create? ");
                 string _stringGoalAnswer = Console.ReadLine();
                 _goalAnswer = int.Parse(_stringGoalAnswer);
@@ -80,6 +85,17 @@ class Program
 
                     GoalChecklist checklistGoal = new GoalChecklist(name, description, points, goalNeeded, bonusPoints, goalCount, goalsDisplay, goalsText, totalPoints);
                     checklistGoal.AddGoal();
+                    goalCount++;
+                }
+                if (_goalAnswer == 4)
+                {
+                    GoalNegative negativeIntro = new GoalNegative();
+                    name = negativeIntro.DisplayNameIntro();
+                    description = negativeIntro.DisplayDescIntro();
+                    points = negativeIntro.DisplayPointsIntroNeg();
+
+                    GoalNegative negativeGoal = new GoalNegative(name, description, points, goalCount, goalsDisplay, goalsText, totalPoints);
+                    negativeGoal.AddGoal();
                     goalCount++;
                 }
             }
@@ -120,7 +136,6 @@ class Program
                 goalsText[0] = totalPoints.ToString();
                 List<string> newGoalsText = new List<string>();
 
-
                 foreach (string goal in goalsText)
                 {
                     string[] seperated = goal.Split("|");
@@ -143,6 +158,12 @@ class Program
                             GoalChecklist checklist = new GoalChecklist();
                             goalsDisplay[recordAnswer - 1] = checklist.ChangeDisplay(seperated);
                             newGoalsText.Add(checklist.ChangeText(goal, recordAnswer));
+                        }
+                        else if (goal.Contains("NegativeGoal"))
+                        {
+                            GoalNegative negative = new GoalNegative();
+                            goalsDisplay[recordAnswer - 1] = negative.ChangeDisplay(seperated);
+                            newGoalsText.Add(negative.ChangeText(goal, recordAnswer));
                         }
                     }
                     else

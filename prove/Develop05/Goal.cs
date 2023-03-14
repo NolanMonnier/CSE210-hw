@@ -94,6 +94,14 @@ public abstract class Goal
                 _goalsDisplay.Add(goal);
                 goalCount++;
             }
+            if (line.Contains("NegativeGoal"))
+            {
+                _goalsText.Add(line);
+                GoalNegative negative = new GoalNegative();
+                string goal = negative.AddDisplayList(line, goalCount);
+                _goalsDisplay.Add(goal);
+                goalCount++;
+            }
         }
         return _goalsDisplay;
     }
@@ -129,6 +137,11 @@ public abstract class Goal
                     GoalChecklist checklist = new GoalChecklist();
                     _totalPoints = checklist.RecordEvent(seperated, totalPoints, goalsText);
 
+                }
+                if (goal.Contains("NegativeGoal"))
+                {
+                    GoalNegative negative = new GoalNegative();
+                    _totalPoints = negative.RecordEvent(seperated, totalPoints, goalsText);
                 }
             }
         }

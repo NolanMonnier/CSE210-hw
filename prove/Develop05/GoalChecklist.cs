@@ -2,7 +2,6 @@ using System;
 
 public class GoalChecklist : Goal
 {
-
     private string _name;
     private string _description;
     private int _points;
@@ -61,7 +60,6 @@ public class GoalChecklist : Goal
         string lineText = "ChecklistGoal" + _sep + _name + _sep + _description + _sep + _points + _sep + _bonusPoints + _sep + _goalNeeded + _sep + _checklistCount + _sep + _goalCount;
         _goalsText.Add(lineText);
     }
-
     public override string AddDisplayList(string line, int goalCount)
     {
         string[] seperated = line.Split(_sep);
@@ -98,9 +96,7 @@ public class GoalChecklist : Goal
             System.Console.WriteLine($"Congratulations!! You have earned {_points} points!");
             System.Console.WriteLine($"You now have {_totalPoints} point.");
         }
-
         return _totalPoints;
-
     }
 
     public override string ChangeDisplay(string[] seperated)
@@ -113,11 +109,11 @@ public class GoalChecklist : Goal
         _goalNeeded = int.Parse(seperated[5]);
         _checklistCount = int.Parse(seperated[6]) + 1;
         _goalCount = int.Parse(seperated[7]);
-        if (_checklistCount != _goalNeeded)
+        if (_checklistCount < _goalNeeded)
         {
             lineDisplay = _goalCount.ToString() + ". [ ] " + _name + " (" + _description + ") -- Currently completed: " + _checklistCount + "/" + _goalNeeded;
         }
-        if (_checklistCount == _goalNeeded)
+        if (_checklistCount >= _goalNeeded)
         {
             lineDisplay = _goalCount.ToString() + ". [X] " + _name + " (" + _description + ") -- Currently completed: " + _checklistCount + "/" + _goalNeeded;
         }

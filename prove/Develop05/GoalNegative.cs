@@ -1,5 +1,6 @@
 using System;
-public class GoalEternal : Goal
+
+public class GoalNegative : Goal
 {
     private string _name;
     private string _description;
@@ -10,11 +11,11 @@ public class GoalEternal : Goal
     List<string> _goalsText = new List<string>();
     private int _totalPoints;
 
-    public GoalEternal() : base()
+    public GoalNegative() : base()
     {
 
     }
-    public GoalEternal(string name,
+    public GoalNegative(string name,
                       string description,
                       int points,
                       int goalCount,
@@ -31,11 +32,18 @@ public class GoalEternal : Goal
         _totalPoints = totalPoints;
     }
 
+    public int DisplayPointsIntroNeg()
+    {
+        System.Console.Write("What is the number of points associated with this goal? (Please enter as a positive integer) ");
+        _points = int.Parse(Console.ReadLine());
+        return _points;
+    }
+
     public override void AddGoal()
     {
         string lineDisplay = _goalCount.ToString() + ". [ ] " + _name + " (" + _description + ")";
         _goalsDisplay.Add(lineDisplay);
-        string lineText = "EternalGoal" + _sep + _name + _sep + _description + _sep + _points + _sep + _goalCount;
+        string lineText = "NegativeGoal" + _sep + _name + _sep + _description + _sep + _points + _sep + _goalCount;
         _goalsText.Add(lineText);
     }
 
@@ -57,8 +65,8 @@ public class GoalEternal : Goal
         _description = seperated[2];
         _points = int.Parse(seperated[3]);
         _goalCount = int.Parse(seperated[4]);
-        _totalPoints = _points + totalPoints;
-        System.Console.WriteLine($"Congratulations!! You have earned {_points} points!");
+        _totalPoints = totalPoints - _points;
+        System.Console.WriteLine($"Oh no... You have lost {_points} points...");
         System.Console.WriteLine($"You now have {_totalPoints} point.");
         return _totalPoints;
     }
@@ -79,7 +87,7 @@ public class GoalEternal : Goal
         _name = seperated[1];
         _description = seperated[2];
         _points = int.Parse(seperated[3]);
-        string textDisplay = "EternalGoal" + _sep + _name + _sep + _description + _sep + _points + _sep + _goalCount;
+        string textDisplay = "NegativeGoal" + _sep + _name + _sep + _description + _sep + _points + _sep + _goalCount;
         return textDisplay;
     }
 }

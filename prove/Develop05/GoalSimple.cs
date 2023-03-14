@@ -1,5 +1,4 @@
 using System;
-
 public class GoalSimple : Goal
 {
     private string _name;
