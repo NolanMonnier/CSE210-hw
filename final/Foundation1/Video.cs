@@ -8,6 +8,7 @@ public class Video
     private string _name = "";
     private string _comment = "";
     private List<string> _commentList = new List<string>();
+    private List<string> _videoList = new List<string>();
 
     public Video()
     {
@@ -20,12 +21,17 @@ public class Video
         _length = length;
 
     }
+    public void AddVideo(string video)
+    {
+        _videoList.Add(video);
+    }
 
     public void AddComment(string name, string comment)
     {
         _name = name;
         _comment = comment;
         _commentList.Add($"{_name}: {_comment}");
+        //_videoList.Add($"{_name}: {_comment}");
         _commentCount++;
     }
 
@@ -45,6 +51,11 @@ public class Video
             newComment.Display();
         }
         System.Console.WriteLine($"Amount of Comments: {_commentCount}");
+
+        //foreach (string video in _videoList)
+        //{
+        //    System.Console.WriteLine(video);
+        //}
 
     }
 }
