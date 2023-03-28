@@ -28,7 +28,7 @@ class Program
         _videoList.Add(video2);
 
 
-        Video video3 = new Video("Purrfectly Adorable: A Compilation of the Cutest Cat Moments", "Samantha Johnson", 176);
+        Video video3 = new Video("Purrfectly Adorable: A Compilation of the Cutest Cat Moments", "Samantha Johnson", 452);
         Comment comment8 = new Comment("MeowMix", "I love how the orange cat is so playful and energetic! He's the star of the show.");
         video3.AddComment(comment8);
         Comment comment9 = new Comment("WhiskerWonderland", "Watching this video has definitely brightened up my day. Thanks for sharing!");
