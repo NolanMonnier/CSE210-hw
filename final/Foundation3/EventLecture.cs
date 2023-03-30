@@ -49,6 +49,6 @@ public class EventLecture : Event
         System.Console.WriteLine($"Time: {_time}");
         System.Console.WriteLine($"Address: {_fullAddress}");
         System.Console.WriteLine($"Speaker: {_speaker}");
-        System.Console.WriteLine($"Capacity: {_capacity}");
+        System.Console.WriteLine($"Capacity: {_capacity} people");
     }
 }
