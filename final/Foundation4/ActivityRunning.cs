@@ -2,18 +2,46 @@ using System;
 public class ActivityRunning : Activity
 {
     private string _date = "";
-    private double _length = 0;
+    private double _distance = 0;
+    private double _minutes = 0;
+    private double _speed = 0;
+    private double _pace = 0;
+
     public ActivityRunning() : base()
     {
 
     }
-    public override double GetSpeed(double distance)
+
+    public ActivityRunning(string date,
+                           double distance,
+                           double minutes,
+                           double speed,
+                           double pace) : base(date, distance, minutes, speed, pace)
     {
-        throw new NotImplementedException();
+        _date = date;
+        _distance = distance;
+        _minutes = minutes;
+        _speed = speed;
+        _pace = pace;
     }
 
-    public override double GetPace(double distance)
+    public override string GetSummary()
     {
-        throw new NotImplementedException();
+        string summary = $"{_date} Running ({_minutes} minutes) - Distance: {_distance} km, Speed: {_speed} kph, Pace: {_pace} min per km";
+        return summary;
+    }
+
+    public override double GetSpeed(double distance, double minutes)
+    {
+        double _speed = 0;
+        _speed = (distance / minutes) * 60;
+        return Math.Round(_speed, 2);
+    }
+
+    public override double GetPace(double distance, double minutes)
+    {
+        double _pace = 0;
+        _pace = minutes / distance;
+        return Math.Round(_pace, 2);
     }
 }

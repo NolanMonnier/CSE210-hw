@@ -1,6 +1,7 @@
 using System;
 public abstract class Activity
 {
+    private string _date = "";
     private double _distance = 0;
     private double _minutes = 0;
     private double _speed = 0;
@@ -10,18 +11,16 @@ public abstract class Activity
 
     }
 
-    public Activity(double distance, double speed, double pace)
+    public Activity(string date, double distance, double minutes, double speed, double pace)
     {
+        _date = date;
         _distance = distance;
+        _minutes = minutes;
         _speed = speed;
         _pace = pace;
     }
 
-    public void GetSummary()
-    {
-
-    }
-
-    public abstract double GetSpeed(double distance);
-    public abstract double GetPace(double distance);
+    public abstract string GetSummary();
+    public abstract double GetSpeed(double distance, double minutes);
+    public abstract double GetPace(double distance, double minutes);
 }
